@@ -38,19 +38,15 @@
 use lithium\data\Connections;
 
 Connections::add('default', array(
-	'type' => 'http',
-	'adapter' => 'CouchDb',
-	'host' => '127.0.0.1',
-	'port' => '5984',
+	'type' => 'MongoDb',
+	'host' => 'localhost',
 	'database' => 'lithium_bin'
 ));
 
 Connections::add('test', array(
-	'type' => 'http',
-	'adapter' => 'CouchDb',
-	'host' => '127.0.0.1',
-	'port' => '5984',
-	'database' => 'test_lithium_bin'
+	'type' => 'MongoDb',
+	'host' => 'localhost',
+	'database' => 'lithium_bin_test'
 ));
 
 ?>
