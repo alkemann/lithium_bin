@@ -4,7 +4,6 @@
 
 <?php if (isset($paste->_id) && isset($paste->rev)): ?>
 	<?=$this->form->hidden('_id'); ?>
-	<?=$this->form->hidden('rev'); ?>
 <?php endif; ?>
 
 <div class="section paste-content">
