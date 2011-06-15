@@ -55,7 +55,7 @@ class PastesController extends \lithium\action\Controller {
 	 * @return array variables to pass to layout and view
 	 */
 	public function view($id = null) {
-		if (!$paste = Paste::find($id)) {
+		if (!$paste = Paste::first(array('_id' => new \MongoId($id)))) {
 			return $this->redirect('Pastes::index');
 		}
 		$paste->parsed = Paste::parse($paste->content, $paste->language);
@@ -97,7 +97,7 @@ class PastesController extends \lithium\action\Controller {
 			if ($paste->save()) {
 				$this->_remember($paste);
 				return $this->redirect(array(
-					'controller' => 'pastes', 'action' => 'view', 'args' => array($paste->id)
+					'controller' => 'pastes', 'action' => 'view', 'args' => array($paste->_id)
 				));
 			}
 		}
@@ -122,7 +122,7 @@ class PastesController extends \lithium\action\Controller {
 	 * @return array
 	 */
 	public function edit($id = null) {
-		if (!($paste = Paste::find($id)) || $paste->immutable) {
+		if (!($paste = Paste::first(array('_id' => new \MongoId($id)))) || $paste->immutable) {
 			return $this->redirect('Pastes::add');
 		}
 		if (!empty($this->request->data)) {
@@ -134,13 +134,12 @@ class PastesController extends \lithium\action\Controller {
 
 			if (isset($this->request->data['copy'])){
 				unset(
-					$this->request->data['id'],
-					$this->request->data['rev'],
+					$this->request->data['_id'],
 					$this->request->data['password'],
 					$this->request->data['copy']
 				);
 				$paste = Paste::create($this->request->data);
-			} elseif ($paste = Paste::find($this->request->data['id'])) {
+			} elseif ($paste = Paste::find($this->request->data['_id'])) {
 				if ($paste->immutable) {
 					return $this->redirect('Pastes::add');
 				}
@@ -148,7 +147,7 @@ class PastesController extends \lithium\action\Controller {
 			if ($paste->save($this->request->data)) {
 				$this->_remember($paste);
 				return $this->redirect(array(
-					'controller' => 'pastes', 'action' => 'view', 'args' => array($paste->id)
+					'controller' => 'pastes', 'action' => 'view', 'args' => array($paste->_id)
 				));
 			}
 		}

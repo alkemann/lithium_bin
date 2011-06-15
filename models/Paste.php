@@ -25,6 +25,9 @@ class Paste extends \lithium\data\Model {
 	 */
 	public static $languages = null;
 
+	protected $_meta = array(
+		'key' => '_id'
+	);
 	/**
 	 *  Schema for Paste
 	 *

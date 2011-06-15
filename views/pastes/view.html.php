@@ -47,7 +47,7 @@ $nickRgb = function($nick) {
 			<?php if (!$paste->immutable): ?>
 				<li>
 					<?=$this->html->link('Edit', array(
-						'controller' => 'pastes', 'action' => 'edit', 'args' => array($paste->id)
+						'controller' => 'pastes', 'action' => 'edit', 'args' => array($paste->_id)
 					), array(
 						'id' => 'code-edit',
 						'title' => 'Edit this paste.'

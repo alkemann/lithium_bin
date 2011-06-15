@@ -40,7 +40,7 @@ $nickRgb = function($nick) {
 		<tr class="<?=($key % 2) ? 'del1' : 'del2'; ?>">
 			<td class="<?=$row->language; ?>" title="<?=$row->language; ?>">
 				<?php echo $this->html->link(
-					$truncate($row->id, 12), '/view/' . $row->id);
+					$truncate($row->_id, 12), '/view/' . $row->_id);
 				?>
 			</td>
 			<td class="preview"><?= $preview($row->content); ?></td>

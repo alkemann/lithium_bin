@@ -2,8 +2,8 @@
 
 <?=$this->form->create($paste, compact('url') + array('method' => 'POST')); ?>
 
-<?php if (isset($paste->id) && isset($paste->rev)): ?>
-	<?=$this->form->hidden('id'); ?>
+<?php if (isset($paste->_id) && isset($paste->rev)): ?>
+	<?=$this->form->hidden('_id'); ?>
 	<?=$this->form->hidden('rev'); ?>
 <?php endif; ?>
 
@@ -52,7 +52,7 @@
 	)); ?>
 	<span class="help">Will need URL to view paste.</span>
 
-	<?php if ((isset($paste->id) && !empty($paste->immutable)) || !isset($paste->id)) : ?>
+	<?php if ((isset($paste->_id) && !empty($paste->immutable)) || !isset($paste->_id)) : ?>
 		<?=$this->form->field('immutable', array(
 			'type' => 'checkbox',
 			'label' => 'immutable'
@@ -66,7 +66,7 @@
 	)); ?>
 	</div>
 	<div class="controls">
-	<?php if (isset($paste->id)): ?>
+	<?php if (isset($paste->_id)): ?>
 		<?=$this->form->submit('save') ?>
 		<?=$this->form->submit('save as copy', array('name' => 'copy')); ?>
 	<?php else: ?>
